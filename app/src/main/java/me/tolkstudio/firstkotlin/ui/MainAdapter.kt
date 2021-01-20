@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import me.tolkstudio.firstkotlin.R
+import me.tolkstudio.firstkotlin.databinding.ItemNoteBinding
 import me.tolkstudio.firstkotlin.model.Note
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.NoteViweHolder>() {
@@ -30,12 +31,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.NoteViweHolder>() {
     }
 
     class NoteViweHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title = itemView.findViewById<TextView>(R.id.title)
-        private val body = itemView.findViewById<TextView>(R.id.body)
+
+        val ui: ItemNoteBinding = ItemNoteBinding.bind(itemView)
 
         fun bind(note: Note) {
-            title.text = note.title
-            body.text = note.note
+            ui.title.text = note.title
+            ui.body.text = note.note
             //itemView.setBackgroundColor(note.color) сделал закруглённые края цвет пока убрал)
             itemView.clipToOutline = true
 
