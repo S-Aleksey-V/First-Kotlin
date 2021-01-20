@@ -10,14 +10,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      val button = findViewById<Button>(R.id.push_button)
 
-      val textView = findViewById<TextView>(R.id.first_lesson)
-
-        button.setOnClickListener {
-            (it as Button).text = "Next Lesson"
-            textView.text = "14.01.2021"
-            
-        }
     }
 }
