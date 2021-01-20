@@ -1,6 +1,8 @@
 package me.tolkstudio.firstkotlin.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(bottom_app_bar)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         adapter = MainAdapter()
         mainRecycler.adapter = adapter
@@ -27,4 +29,11 @@ class MainActivity : AppCompatActivity() {
             state?.let { adapter.notes = state.notes }
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.bottomappbar, menu)
+        return true
+    }
+
 }
