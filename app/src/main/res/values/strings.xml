@@ -2,4 +2,6 @@
     <string name="app_name">First Kotlin</string>
     <string name="first_lesson">First Lesson</string>
     <string name="push">Push</string>
+    <string name="search">Search</string>
+    <string name="action_settings">settings</string>
 </resources>
