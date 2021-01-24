@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import me.tolkstudio.firstkotlin.R
 import me.tolkstudio.firstkotlin.databinding.ItemNoteBinding
 import me.tolkstudio.firstkotlin.model.Note
+import me.tolkstudio.firstkotlin.ui.MainAdapter.NoteViweHolder
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.NoteViweHolder>() {
+interface OnItemClickListener {
+    fun onItemClick(note: Note)
+}
+
+class MainAdapter(private val ItemClickListener: OnItemClickListener) : RecyclerView.Adapter<NoteViweHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -20,17 +25,17 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.NoteViweHolder>() {
 
     override fun getItemCount(): Int = notes.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.NoteViweHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViweHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_note, parent, false)
-        return MainAdapter.NoteViweHolder(view)
+        return NoteViweHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainAdapter.NoteViweHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteViweHolder, position: Int) {
         holder.bind(notes[position])
     }
 
-    class NoteViweHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   inner class NoteViweHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val ui: ItemNoteBinding = ItemNoteBinding.bind(itemView)
 
@@ -39,6 +44,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.NoteViweHolder>() {
             ui.body.text = note.note
             //itemView.setBackgroundColor(note.color) сделал закруглённые края цвет пока убрал)
             itemView.clipToOutline = true
+            itemView.setOnClickListener { ItemClickListener.onItemClick(note)}
 
         }
 

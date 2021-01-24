@@ -27,12 +27,3 @@ class Note(val id: String,
     }
 }
 
-enum class Color {
-    WHITE,
-    YELLOW,
-    GREEN,
-    BLUE,
-    RED,
-    VIOLET,
-    PINK
-}

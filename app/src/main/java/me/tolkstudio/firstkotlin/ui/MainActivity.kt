@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import me.tolkstudio.firstkotlin.R
 import me.tolkstudio.firstkotlin.databinding.ActivityMainBinding
+import me.tolkstudio.firstkotlin.model.Note
 import me.tolkstudio.firstkotlin.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,12 +23,22 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(ui.bottomAppBar)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        adapter = MainAdapter()
+
+        adapter = MainAdapter(object: OnItemClickListener{
+            override fun onItemClick(note: Note) {
+                openNoteScreen(note)
+            }
+
+        })
         ui.mainRecycler.adapter = adapter
 
         viewModel.viewState().observe(this, Observer<MainViewState> { state ->
             state?.let { adapter.notes = state.notes }
         })
+    }
+
+    private fun openNoteScreen(note: Note){
+        startActivity(NoteActivity.getStartIntent(this,note))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
