@@ -1,26 +1,32 @@
 package me.tolkstudio.firstkotlin.model
 
+import java.util.*
+
 object Repository {
-    private val notes: List<Note> = listOf(
+    private val notes: MutableList<Note> = mutableListOf(
             Note(
-                    "Понедельник",
-                    "Первый день",
-                    0xFF03DAC5.toInt()
+                    id = UUID.randomUUID().toString(),
+                    title = "Понедельник",
+                    note = "первый день",
+                    color = 0xFF03DAC5.toInt()
             ),
             Note(
-                    "Вторник",
-                    "Второй день",
-                    0xFF03DAC5.toInt()
+                    id = UUID.randomUUID().toString(),
+                    title = "Вторник",
+                    note = "Второй день",
+                    color = 0xFF03DAC5.toInt()
             ),
             Note(
-                    "Среда",
-                    "Третий день",
-                    0xFF82E411.toInt()
+                    id = UUID.randomUUID().toString(),
+                    title = "Среда",
+                    note = "Третий день",
+                    color = 0xFF82E411.toInt()
             ),
             Note(
-                    "Четверг",
-                    "Четвёртый день день",
-                    0xFF82E411.toInt()
+                    id = UUID.randomUUID().toString(),
+                    title = "Четверг",
+                    note = "Четвёртый день день",
+                    color = 0xFF82E411.toInt()
             )
     )
 
