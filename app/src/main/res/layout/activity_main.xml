@@ -17,9 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Notes" />
+            app:title="@string/Notes" />
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecycler"
@@ -36,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#673AB7"
+        app:backgroundTint="@color/bottom_backgroundTint"
         app:fabAlignmentMode="end"/>
 
 
@@ -46,6 +45,5 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_add"
         app:layout_anchor="@id/bottom_app_bar"/>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
