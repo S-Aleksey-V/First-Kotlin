@@ -1,5 +1,7 @@
 package me.tolkstudio.firstkotlin.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,5 +46,9 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
     private fun openNoteScreen(note: Note?) {
         val intent = NoteActivity.getStartIntent(this, note?.id)
         startActivity(intent)
+    }
+
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

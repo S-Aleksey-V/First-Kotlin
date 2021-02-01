@@ -28,11 +28,11 @@ abstract class BaseActivity<T, VS : BaseViewState<T>> : AppCompatActivity() {
 
     abstract fun renderData(data: T)
 
-    protected fun renderError(error: Throwable) {
+    protected open fun renderError(error: Throwable) {
         error.message?.let { showError(it) }
     }
 
-    protected fun showError(error: String) {
+    protected open fun showError(error: String) {
         Snackbar.make(ui.root, error, Snackbar.LENGTH_INDEFINITE).apply {
             setAction("Понятно") { dismiss() }
             show()

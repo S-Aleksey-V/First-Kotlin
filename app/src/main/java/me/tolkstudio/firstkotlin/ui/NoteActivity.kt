@@ -71,7 +71,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     private fun initView() {
         note?.run {
-            ui.titleEt.setText(note)
+            ui.titleEt.setText(title)
             ui.bodyEt.setText(note)
 
             supportActionBar?.title = lastChanged.format()
