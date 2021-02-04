@@ -13,7 +13,6 @@ abstract class BaseActivity<T, VS : BaseViewState<T>> : AppCompatActivity() {
     abstract val layoutRes: Int
     abstract val ui: ViewBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ui.root)

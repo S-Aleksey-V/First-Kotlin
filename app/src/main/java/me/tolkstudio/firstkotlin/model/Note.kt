@@ -28,7 +28,5 @@ data class Note(
     override fun hashCode(): Int {
         return id.hashCode()
     }
-
-
 }
 

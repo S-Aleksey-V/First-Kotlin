@@ -9,16 +9,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 import me.tolkstudio.firstkotlin.R
-import me.tolkstudio.firstkotlin.databinding.ActivityMainBinding
 import me.tolkstudio.firstkotlin.databinding.ActivityNoteBinding
 import me.tolkstudio.firstkotlin.model.Note
 import me.tolkstudio.firstkotlin.viewmodel.NoteViewModel
 import java.util.*
 
 private const val SAVE_DELAY = 2000L
+private const val COLOR = 0xFF82E411
 
 class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
@@ -76,10 +75,8 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
             supportActionBar?.title = lastChanged.format()
         }
-
         ui.titleEt.addTextChangedListener(textChangeListener)
         ui.bodyEt.addTextChangedListener(textChangeListener)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -94,7 +91,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
             UUID.randomUUID().toString(),
             ui.titleEt.text.toString(),
             ui.bodyEt.text.toString(),
-            0xFF82E411.toInt()
+            COLOR.toInt()
     )
 
     private fun triggerSaveNote() {
@@ -106,7 +103,6 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
                     note = ui.bodyEt.text.toString(),
                     lastChanged = Date()
             ) ?: createNewNote()
-
             if (note != null) viewModel.saveChanges(note!!)
         }, SAVE_DELAY)
     }
