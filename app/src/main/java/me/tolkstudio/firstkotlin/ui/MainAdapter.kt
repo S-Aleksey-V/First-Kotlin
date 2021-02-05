@@ -1,10 +1,9 @@
 package me.tolkstudio.firstkotlin.ui
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import me.tolkstudio.firstkotlin.R
 import me.tolkstudio.firstkotlin.databinding.ItemNoteBinding
@@ -40,9 +39,17 @@ class MainAdapter(private val ItemClickListener: OnItemClickListener) : Recycler
         val ui: ItemNoteBinding = ItemNoteBinding.bind(itemView)
 
         fun bind(note: Note) {
+            val color = when (note.color){
+                Color.WHITE -> R.color.color_white
+                Color.YELLOW   -> R.color.color_yello
+                Color.RED -> R.color.color_red
+                Color.GREEN -> R.color.color_green
+                Color.BLUE -> R.color.color_blue
+                else -> R.color.color_green
+            }
             ui.title.text = note.title
             ui.body.text = note.note
-            //itemView.setBackgroundColor(note.color)
+//            itemView.setBackgroundColor(note.color)
             itemView.clipToOutline = true
             itemView.setOnClickListener { ItemClickListener.onItemClick(note) }
 

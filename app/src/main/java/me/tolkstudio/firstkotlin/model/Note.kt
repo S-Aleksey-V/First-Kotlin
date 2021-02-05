@@ -10,7 +10,7 @@ data class Note(
         val id: String = " ",
         val title: String = " ",
         val note: String = " ",
-        val color: Int = Color.WHITE,
+        val color: Int  = Color.WHITE,
         val lastChanged: Date = Date()
 ) : Parcelable {
 
@@ -28,5 +28,15 @@ data class Note(
     override fun hashCode(): Int {
         return id.hashCode()
     }
+}
+
+enum class Color {
+    WHITE,
+    YELLOW,
+    GREEN,
+    BLUE,
+    RED,
+    VIOLET,
+    PINK
 }
 

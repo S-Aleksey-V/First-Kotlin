@@ -12,4 +12,8 @@
     <string name="ok_bth_title">Ок</string>
     <string name="logout_dialog_cancel">Отмена</string>
     <string name="notes">Notes</string>
+    <string name="delete_menu_title">delete</string>
+    <string name="change_color_menu_title">ChangeColor</string>
+    <string name="delete_dialog_message"><![CDATA[Delete>?]]></string>
+    <string name="cancel_btn_title">Cancel</string>
 </resources>

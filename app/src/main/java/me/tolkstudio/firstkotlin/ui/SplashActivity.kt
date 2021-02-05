@@ -5,21 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
 import me.tolkstudio.firstkotlin.R
 import me.tolkstudio.firstkotlin.databinding.ActivitySplashBinding
 import me.tolkstudio.firstkotlin.model.NoAuthException
-import me.tolkstudio.firstkotlin.viewmodel.MainViewModel
 import me.tolkstudio.firstkotlin.viewmodel.SplashViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val RC_SIGN_IN = 42
 private const val START_DELAY = 1000L
 
 class SplashActivity : BaseActivity<Boolean?, SplashViewState>() {
 
-    override val viewModel: SplashViewModel
-            by lazy { ViewModelProvider(this).get(SplashViewModel::class.java) }
+    override val viewModel: SplashViewModel by viewModel()
 
     override val ui: ActivitySplashBinding
             by lazy { ActivitySplashBinding.inflate(layoutInflater) }

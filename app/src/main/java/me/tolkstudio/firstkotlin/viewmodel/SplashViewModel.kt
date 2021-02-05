@@ -5,7 +5,7 @@ import me.tolkstudio.firstkotlin.model.Repository
 import me.tolkstudio.firstkotlin.ui.BaseViewModel
 import me.tolkstudio.firstkotlin.ui.SplashViewState
 
-class SplashViewModel(private val repository: Repository = Repository) :
+class SplashViewModel(private val repository: Repository) :
         BaseViewModel<Boolean?, SplashViewState>() {
 
     fun requestUser() {
