@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="#673AB7"
-        app:fabAlignmentMode="center"/>
+        app:fabAlignmentMode="end"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
