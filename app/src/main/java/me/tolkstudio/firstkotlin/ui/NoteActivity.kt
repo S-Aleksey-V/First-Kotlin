@@ -8,9 +8,11 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 import me.tolkstudio.firstkotlin.R
+import me.tolkstudio.firstkotlin.databinding.ActivityMainBinding
 import me.tolkstudio.firstkotlin.databinding.ActivityNoteBinding
 import me.tolkstudio.firstkotlin.model.Note
 import me.tolkstudio.firstkotlin.viewmodel.NoteViewModel
@@ -30,8 +32,12 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         }
     }
 
-    private lateinit var ui: ActivityNoteBinding
-    override val viewModel: NoteViewModel by lazy { ViewModelProviders.of(this).get(NoteViewModel::class.java) }
+    override val ui: ActivityNoteBinding
+            by lazy { ActivityNoteBinding.inflate(layoutInflater) }
+
+    override val viewModel: NoteViewModel
+            by lazy { ViewModelProvider(this).get(NoteViewModel::class.java) }
+
     override val layoutRes: Int = R.layout.activity_note
     private var note: Note? = null
 
@@ -48,28 +54,31 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ui = ActivityNoteBinding.inflate(layoutInflater)
         setContentView(ui.root)
 
         val noteId = intent.getStringExtra(EXTRA_NOTE)
-        setSupportActionBar(bottom_app_bar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         noteId?.let {
             viewModel.loadNote(it)
+        } ?: run {
+            supportActionBar?.title = "new Note"
         }
-        if (noteId == null) supportActionBar?.title = getString(R.string.new_note_title)
 
         initView()
     }
 
     private fun initView() {
-        ui.titleEt.setText(note?.title ?: "")
-        ui.bodyEt.setText(note?.title ?: "")
+        note?.run {
+            ui.titleEt.setText(title)
+            ui.bodyEt.setText(note)
+
+            supportActionBar?.title = lastChanged.format()
+        }
 
         ui.titleEt.addTextChangedListener(textChangeListener)
         ui.bodyEt.addTextChangedListener(textChangeListener)
-
 
     }
 
