@@ -35,16 +35,16 @@ class MainAdapter(private val ItemClickListener: OnItemClickListener) : Recycler
         holder.bind(notes[position])
     }
 
-   inner class NoteViweHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class NoteViweHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val ui: ItemNoteBinding = ItemNoteBinding.bind(itemView)
 
         fun bind(note: Note) {
             ui.title.text = note.title
             ui.body.text = note.note
-            //itemView.setBackgroundColor(note.color) сделал закруглённые края цвет пока убрал)
+            //itemView.setBackgroundColor(note.color)
             itemView.clipToOutline = true
-            itemView.setOnClickListener { ItemClickListener.onItemClick(note)}
+            itemView.setOnClickListener { ItemClickListener.onItemClick(note) }
 
         }
 

@@ -1,46 +1,42 @@
 package me.tolkstudio.firstkotlin.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import me.tolkstudio.firstkotlin.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
+import me.tolkstudio.firstkotlin.R
 import me.tolkstudio.firstkotlin.model.Note
 import me.tolkstudio.firstkotlin.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
 
-    lateinit var ui: ActivityMainBinding
-    lateinit var viewModel: MainViewModel
-    lateinit var adapter: MainAdapter
+class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
+
+    override val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+    override val layoutRes: Int = R.layout.activity_main
+    private lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ui = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(ui.root)
 
-        setSupportActionBar(ui.bottomAppBar)
-        ui.bottomAppBar.setOutlineProvider(null)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        setSupportActionBar(bottom_app_bar)
 
-        adapter = MainAdapter(object: OnItemClickListener{
+        adapter = MainAdapter(object : OnItemClickListener {
             override fun onItemClick(note: Note) {
                 openNoteScreen(note)
             }
 
         })
-        ui.mainRecycler.adapter = adapter
+        mainRecycler.adapter = adapter
 
-        viewModel.viewState().observe(this, Observer<MainViewState> { state ->
-            state?.let { adapter.notes = state.notes }
-        })
-
-        ui.fab.setOnClickListener { openNoteScreen() }
+        fab.setOnClickListener { openNoteScreen(null) }
     }
 
-    private fun openNoteScreen(note: Note? = null){
-        startActivity(NoteActivity.getStartIntent(this,note))
+    override fun renderData(data: List<Note>?) {
+        if (data == null) return
+        adapter.notes = data
     }
 
-
+    private fun openNoteScreen(note: Note?) {
+        val intent = NoteActivity.getStartIntent(this, note?.id)
+        startActivity(intent)
+    }
 }
