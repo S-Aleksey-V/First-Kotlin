@@ -1,13 +1,14 @@
 package me.tolkstudio.firstkotlin.model
 
-object Repository {
+import androidx.lifecycle.MutableLiveData
+import me.tolkstudio.firstkotlin.providers.FireStoreProvider
+import me.tolkstudio.firstkotlin.providers.RemoteDataProvider
 
-    private val remoteDataProvider: RemoteDataProvider = FireStoreProvider()
+class Repository(private val remoteDataProvider: RemoteDataProvider) {
 
-    fun getNotes() = remoteDataProvider.subscribeToAllNores()
-
+    fun getNotes() = remoteDataProvider.subscribeToAllNotes()
     fun saveNote(note: Note) = remoteDataProvider.saveNote(note)
-
     fun getNoteById(id: String) = remoteDataProvider.getNoteById(id)
-
+    fun getCurrentUser() = remoteDataProvider.getCurrentUser()
+    fun deleteNote(noteId: String) = remoteDataProvider.deleteNote(noteId)
 }
