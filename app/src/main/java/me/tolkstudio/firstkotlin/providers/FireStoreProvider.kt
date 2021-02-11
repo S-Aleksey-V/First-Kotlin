@@ -23,7 +23,7 @@ class FireStoreProvider(
     private val currentUser
         get() = firebaseAuth.currentUser
 
-    override fun subscribeToAllNores(): LiveData<NoteResult> =
+    override fun subscribeToAllNotes(): LiveData<NoteResult> =
             MutableLiveData<NoteResult>().apply {
 
                 try {

@@ -12,6 +12,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        assertEquals("Но ведь 2 + 2 это 4",4, 2 + 2);
     }
 }

@@ -13,15 +13,18 @@ fun Date.format(): String = SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault
 
 fun Context.dip(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
-//fun Color.getColorInt(context: Context): Int =
-//        ContextCompat.getColor(context, getColorRes())
-//
 fun Color.getColorRes(): Int = when (this) {
     Color.WHITE -> R.color.white
     Color.RED -> R.color.color_red
     Color.GREEN -> R.color.color_green
+    Color.BLUE -> R.color.color_blue
 
     else -> R.color.white
 }
 
-
+fun sortDescAndDistinctAndRemoteNulls(list: List<Int?>?): List<Int> =
+    list?.filterNotNull()
+            ?.distinct()
+            ?.sorted()
+            ?.reversed()
+            ?: listOf()

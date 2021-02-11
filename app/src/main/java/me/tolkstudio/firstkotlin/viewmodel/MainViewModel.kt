@@ -1,5 +1,6 @@
 package me.tolkstudio.firstkotlin.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import me.tolkstudio.firstkotlin.model.Note
@@ -33,7 +34,8 @@ class MainViewModel(val repository: Repository) :
         repositoryNotes.observeForever(notesObserver)
     }
 
-    override fun onCleared() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public override fun onCleared() {
         repositoryNotes.removeObserver(notesObserver)
     }
 }
