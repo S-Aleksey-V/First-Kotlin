@@ -49,7 +49,6 @@ class MainAdapter(private val ItemClickListener: OnItemClickListener) : Recycler
             }
             ui.title.text = note.title
             ui.body.text = note.note
-//            itemView.setBackgroundColor(note.color)
             itemView.clipToOutline = true
             itemView.setOnClickListener { ItemClickListener.onItemClick(note) }
 
