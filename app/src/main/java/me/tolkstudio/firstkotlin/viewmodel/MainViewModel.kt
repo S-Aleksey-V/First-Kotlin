@@ -1,39 +1,36 @@
 package me.tolkstudio.firstkotlin.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import me.tolkstudio.firstkotlin.model.Note
 import me.tolkstudio.firstkotlin.model.NoteResult
 import me.tolkstudio.firstkotlin.model.Repository
 import me.tolkstudio.firstkotlin.ui.BaseViewModel
 import me.tolkstudio.firstkotlin.ui.MainViewState
 
-class MainViewModel(val repository: Repository = Repository) :
-        BaseViewModel<List<Note>?, MainViewState>() {
+class MainViewModel(val repository: Repository) :
+        BaseViewModel<List<Note>?>() {
 
-    private val notesObserver = object : Observer<NoteResult> {
-        override fun onChanged(t: NoteResult?) {
-            if (t == null) return
+    private val notesChannel by lazy { runBlocking { repository.getNotes() } }
 
-            when (t) {
-                is NoteResult.Success<*> -> {
-                    viewStateLiveData.value = MainViewState(notes = t.data as? List<Note>)
-                }
-                is NoteResult.Error -> {
-                    viewStateLiveData.value = MainViewState(error = t.error)
+    init {
+        launch {
+            notesChannel.consumeEach { result ->
+                when (result) {
+                    is NoteResult.Success<*> -> setData(result.data as? List<Note>)
+                    is NoteResult.Error -> setError(result.error)
                 }
             }
         }
     }
 
-    private val repositoryNotes = repository.getNotes()
-
-    init {
-        viewStateLiveData.value = MainViewState()
-        repositoryNotes.observeForever(notesObserver)
-    }
-
-    override fun onCleared() {
-        repositoryNotes.removeObserver(notesObserver)
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public override fun onCleared() {
+        notesChannel.cancel()
+        super.onCleared()
     }
 }
