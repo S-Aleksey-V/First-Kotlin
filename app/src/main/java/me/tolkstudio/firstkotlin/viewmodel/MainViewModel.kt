@@ -8,7 +8,7 @@ import me.tolkstudio.firstkotlin.model.Repository
 import me.tolkstudio.firstkotlin.ui.BaseViewModel
 import me.tolkstudio.firstkotlin.ui.MainViewState
 
-class MainViewModel(val repository: Repository = Repository) :
+class MainViewModel(val repository: Repository) :
         BaseViewModel<List<Note>?, MainViewState>() {
 
     private val notesObserver = object : Observer<NoteResult> {

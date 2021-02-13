@@ -16,6 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="Notes" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <me.tolkstudio.firstkotlin.ui.ColorPickerView
+                android:id="@+id/color_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize" />
+
+        </HorizontalScrollView>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
